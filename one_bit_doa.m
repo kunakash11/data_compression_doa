@@ -3,12 +3,12 @@
 %% Transmitted signal
 clear
 
-Nsig        = 2;                                          % Number of signals
-doa_true    = sort(randsample(0:180-1,Nsig));            % True angle of arrival of two sources
-antenna_num = 16;                                         % Antenna numbers of the antenna array
-time_ins    = 100;                                        % The number of time instants
+Nsig        = 2;                                        % Number of signals
+doa_true    = sort(randsample(180,Nsig));               % True angle of arrival of two sources
+antenna_num = 16;                                       % Antenna numbers of the antenna array
+time_ins    = 100;                                      % The number of time instants
 s           = randn(Nsig,time_ins);  
-x_clean     = signal_model(s, doa_true, antenna_num);     % Signal model of first source
+x_clean     = signal_model(s, doa_true, antenna_num);   % Signal model of first source
 SNR         = 5;
 
 % adding AWGN
@@ -87,7 +87,7 @@ end
 % IHT parameters
 max_iter = 10;          % maximum number of iterations
 K = Nsig;               % sparsity level (= number of signals)
-mu = 1 / norm(A)^2;    % step size parameter
+mu = 1 / norm(A)^2;     % step size parameter
 tol = 1e-6;             % convergence tolerance
 
 % initialization
